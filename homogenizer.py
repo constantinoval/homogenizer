@@ -35,6 +35,7 @@ def invM(C):
     """
         Функция обращения матрицы 6x6
     """
+    C = deepcopy(C)
     S = []
     for i in range(6):
         S.append([0]*i+[1.0]+[0]*(5-i))
