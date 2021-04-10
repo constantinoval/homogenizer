@@ -116,7 +116,8 @@ class HomogenizerUI:
                         logos_helper=lh,
                         working_dir=self.WorkingDirVar.get(),
                         strain_value=float(self.StrainVar.get()))
-        h.do_homogenization(int(self.MaxWorkersVar.get()))
+        maxWorkers = int(self.MaxWorkersVar.get()) if self.ParallelVar.get() else 1
+        h.do_homogenization(maxWorkers)
         self.text1.insert('end', 'Матрица жесткости D:\n')
         self.text1.tag_add('D', 1.0, '1.end')
         self.text1.tag_config('D', font=('Times New Roman', 12, 'bold'))
@@ -152,6 +153,10 @@ class HomogenizerUI:
                           'nuxy={:10.3e} nuxz={:10.3e} nuyz={:10.3e}\n'.format(h.eng_moduli['nuxy'],
                                                                                h.eng_moduli['nuxz'],
                                                                                h.eng_moduli['nuyz']))
+        self.text1.insert('end',
+                          'nuyx={:10.3e} nuzx={:10.3e} nuzy={:10.3e}\n'.format(h.eng_moduli['nuyx'],
+                                                                               h.eng_moduli['nuzx'],
+                                                                               h.eng_moduli['nuzy']))
 
     def run(self):
         self.mainwindow.mainloop()

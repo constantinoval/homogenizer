@@ -669,12 +669,25 @@ class homogenizer(object):
         self.eng_moduli['Ex'] = 1/self.S[0][0]
         self.eng_moduli['Ey'] = 1/self.S[1][1]
         self.eng_moduli['Ez'] = 1/self.S[2][2]
+
         self.eng_moduli['nuxy'] = -self.S[0][1]/self.S[0][0]
         self.eng_moduli['nuxz'] = -self.S[0][2]/self.S[0][0]
         self.eng_moduli['nuyz'] = -self.S[1][2]/self.S[1][1]
+
+        self.eng_moduli['nuyx'] = -self.S[1][0]/self.S[1][1]
+        self.eng_moduli['nuzx'] = -self.S[2][0]/self.S[2][2]
+        self.eng_moduli['nuzy'] = -self.S[2][1]/self.S[2][2]
+
         self.eng_moduli['Gxy'] = 0.5/self.S[3][3]
         self.eng_moduli['Gxz'] = 0.5/self.S[4][4]
         self.eng_moduli['Gyz'] = 0.5/self.S[5][5]
+
+        # self.eng_moduli['nuyx'] = self.eng_moduli['nuxy'] * \
+        #     self.eng_moduli['Ey']/self.eng_moduli['Ex']
+        # self.eng_moduli['nuzx'] = self.eng_moduli['nuxz'] * \
+        #     self.eng_moduli['Ez']/self.eng_moduli['Ex']
+        # self.eng_moduli['nuzy'] = self.eng_moduli['nuyz'] * \
+        #     self.eng_moduli['Ez']/self.eng_moduli['Ey']
 
     def do_homogenization(self, max_workers=2) -> None:
         for i in range(6):
